@@ -3,18 +3,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Home,
-  User,
-  Briefcase,
-  Mail,
-  FileText,
-  Code,
-  Moon,
-  Sun,
-  Palette,
-  Sparkles,
-  ExternalLink
-} from 'lucide-react';
+  IconHome,
+  IconUser,
+  IconBriefcase,
+  IconMail,
+  IconFileText,
+  IconCode,
+  IconMoon,
+  IconSun,
+  IconPalette,
+  IconSparkles,
+  IconExternalLink
+} from '@tabler/icons-react';
 
 type Icon3DProps = {
   icon: string;
@@ -91,33 +91,33 @@ export default function Icon3D({
   const renderIcon = () => {
     switch (icon) {
       case 'home':
-        return <Home size={size} />;
+        return <IconHome size={size} />;
       case 'user':
-        return <User size={size} />;
+        return <IconUser size={size} />;
       case 'projects':
-        return <Briefcase size={size} />;
+        return <IconBriefcase size={size} />;
       case 'contact':
-        return <Mail size={size} />;
+        return <IconMail size={size} />;
       case 'resume':
-        return <FileText size={size} />;
+        return <IconFileText size={size} />;
       case 'code':
-        return <Code size={size} />;
+        return <IconCode size={size} />;
       case 'github':
-        return <ExternalLink size={size} />;
+        return <IconExternalLink size={size} />;
       case 'linkedin':
-        return <ExternalLink size={size} />;
+        return <IconExternalLink size={size} />;
       case 'twitter':
-        return <ExternalLink size={size} />;
+        return <IconExternalLink size={size} />;
       case 'moon':
-        return <Moon size={size} />;
+        return <IconMoon size={size} />;
       case 'sun':
-        return <Sun size={size} />;
+        return <IconSun size={size} />;
       case 'theme':
-        return <Palette size={size} />;
+        return <IconPalette size={size} />;
       case 'sparkles':
-        return <Sparkles size={size} />;
+        return <IconSparkles size={size} />;
       default:
-        return <Code size={size} />;
+        return <IconCode size={size} />;
     }
   };
 

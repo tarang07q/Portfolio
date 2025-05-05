@@ -54,7 +54,14 @@ export default function RootLayout({
           .dark a { color: #3b82f6; }
         `}} />
 
-        {/* No need for direct CSS links in dynamic deployment */}
+        {/* Add direct CSS links and base tag only for GitHub Pages */}
+        {process.env.GITHUB_PAGES === 'true' && (
+          <>
+            <link rel="stylesheet" href="/Portfolio/globals.css" />
+            <link rel="stylesheet" href="/Portfolio/styles.css" />
+            <base href="/Portfolio/" />
+          </>
+        )}
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

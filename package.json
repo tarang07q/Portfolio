@@ -2,11 +2,18 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tarang07q.github.io/Portfolio/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fix-paths": "node scripts/fix-paths.js",
+    "copy-assets": "node scripts/copy-assets.js",
+    "build:github": "copy .env.github .env.production && next build",
+    "predeploy": "npm run build:github && npm run fix-paths && npm run copy-assets",
+    "deploy": "gh-pages -d out",
+    "build:vercel": "next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
