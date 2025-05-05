@@ -1,24 +1,32 @@
 "use client";
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import OptimizedImage from "./optimized-image"
-import Link from "next/link"
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import OptimizedImage from "./optimized-image";
+import Link from "next/link";
 
-interface ProjectCardProps {
-  title: string
-  description: string
-  image: string
-  link: string
-  tags: string[]
+// Simplified props for easier editing
+interface EnhancedProjectCardProps {
+  title: string;
+  description: string;
+  imageUrl: string; // URL for the project image
+  link: string;
+  tags: string[];
 }
 
-export default function ProjectCard({ title, description, image, link, tags }: ProjectCardProps) {
+export default function EnhancedProjectCard({
+  title,
+  description,
+  imageUrl,
+  link,
+  tags
+}: EnhancedProjectCardProps) {
   return (
     <div className="transition-all duration-300 hover:-translate-y-2 h-full">
       <Card className="overflow-hidden h-full flex flex-col border border-primary/10 dark:border-primary/5 shadow-lg">
         <div className="relative aspect-video">
+          {/* Image with fallback */}
           <OptimizedImage
-            src={image}
+            src={imageUrl}
             alt={title}
             fill
             className="object-cover transition-transform hover:scale-105 duration-500"
@@ -54,6 +62,5 @@ export default function ProjectCard({ title, description, image, link, tags }: P
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }
-

@@ -1,146 +1,228 @@
+"use client";
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 import Link from "next/link"
 import ContactForm from "./components/contact-form"
 import ProjectCard from "./components/project-card"
+import EnhancedProjectCard from "./components/enhanced-project-card"
 import TechStack from "./components/tech-stack"
+import Icon3D from "./components/3d-icon"
+import OptimizedImage from "./components/optimized-image"
 
 export default function Page() {
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
-          <div className="mr-4 hidden md:flex">
-            <Link className="mr-6 flex items-center space-x-2" href="/">
-              <span className="hidden font-bold sm:inline-block">Tarang_Bhargava</span>
-            </Link>
-            <nav className="flex items-center space-x-6 text-sm font-medium">
-              <Link href="#about" className="transition-colors hover:text-foreground/80">
-                About
+    <div className="min-h-screen bg-background relative">
+      <div className="absolute inset-0 -z-10 h-full w-full">
+        {/* Background that adapts to theme */}
+        <div className="absolute inset-0 bg-[url('/images/light-bg.svg')] dark:bg-[url('/images/dark-bg.svg')] bg-cover bg-fixed opacity-[0.5] dark:opacity-[0.7]"></div>
+      </div>
+
+      <main>
+        {/* Hero Section */}
+        <section id="home" className="h-screen flex flex-col justify-center items-center px-8 py-8 md:py-16 lg:py-20 text-center">
+          <div className="max-w-3xl mx-auto pt-0 md:pt-0 lg:pt-0 -mt-20">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 mt-0">Tarang Bhargava</h1>
+            <h2 className="text-xl md:text-2xl text-muted-foreground mb-12">Full Stack Developer</h2>
+            <p className="text-lg mb-14 mx-auto">
+              A passionate Full Stack Developer dedicated to building digital experiences with modern technologies.
+              I specialize in crafting elegant solutions to complex problems, leveraging both front-end and back-end
+              expertise to create dynamic, responsive web applications.
+            </p>
+            <div className="flex gap-4 justify-center mb-4">
+              <Link
+                href="#projects"
+                scroll={false}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <Button size="lg" className="px-5 py-5 text-base">View Projects</Button>
               </Link>
-              <Link href="#projects" className="transition-colors hover:text-foreground/80">
-                Projects
+              <Link
+                href="#contact"
+                scroll={false}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <Button variant="outline" size="lg" className="px-5 py-5 text-base">Contact Me</Button>
               </Link>
-              <Link href="#contact" className="transition-colors hover:text-foreground/80">
-                Contact
-              </Link>
-            </nav>
+            </div>
           </div>
-          <div className="ml-auto">
-  <Link href="/TarangBhargava_resume.pdf" target="_blank">
-    <Button variant="outline">Resume</Button>
-  </Link>
-</div>
+        </section>
 
-        </div>
-      </header>
+        {/* About Section */}
+        <section id="about" className="py-4 md:py-6 lg:py-8 px-8 bg-muted/10 dark:bg-muted/5">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col items-center mb-8">
+              <div className="flex items-center gap-3 mb-2">
+                <Icon3D icon="user" color="green" size={24} />
+                <h2 className="text-3xl font-bold">About Me</h2>
+              </div>
+              <div className="h-1 w-20 bg-primary mt-3 rounded-full"></div>
+              <p className="mt-3 text-muted-foreground text-center max-w-2xl">
+                Learn more about my background, skills, and what drives me as a developer.
+              </p>
+            </div>
 
-      <main className="container px-4 md:px-6">
-        <section id="about" className="py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Full Stack Developer
-                </h1>
-                <p className="mx-auto max-w-[700px] text-center text-gray-500 md:text-xl dark:text-gray-400">
-                  Hi, I'm <strong>Tarang Bhargava</strong>, a passionate Full Stack Developer dedicated to building digital experiences with modern technologies. I specialize in crafting elegant solutions to complex problems, leveraging both front-end and back-end expertise to create dynamic, responsive web applications that enhance user experience and drive innovation.
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="flex flex-col space-y-3 text-center md:text-left">
+                <p className="text-lg">
+                  With a strong foundation in both design and logic, I ensure every project is efficient, scalable, and user-centric.
+                  A passionate Full Stack Developer dedicated to building digital experiences with modern technologies. I specialize in crafting elegant solutions to complex problems, leveraging both front-end and back-end expertise to create dynamic, responsive web applications. I thrive in fast-paced environments where innovation meets functionality.
+                </p>
+                <p className="text-lg">
+                  I'm a passionate Full Stack Developer based in Chennai, with expertise in modern web technologies and a focus on creating impactful digital solutions. My journey in software development has been driven by a desire to build applications that solve real-world problems.
                 </p>
 
+                <div className="pt-3 flex justify-center md:justify-start">
+                  <Link
+                    href="/TarangBhargava_resume.pdf"
+                    target="_blank"
+                  >
+                    <Button variant="outline" className="flex items-center gap-2">
+                      <Icon3D icon="resume" color="orange" size={16} />
+                      <span>View Resume</span>
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <div className="space-x-5">
-                <Link href="https://github.com/tarang07q" target="_blank">
-                  <Button variant="outline" size="icon">
-                    <Github className="h-6 w-6" />
-                    <span className="sr-only">GitHub</span>
-                  </Button>
-                </Link>
-                <Link href="https://www.linkedin.com/in/tarang-bhargava-400687269/" target="_blank">
-                  <Button variant="outline" size="icon">
-                    <Linkedin className="h-4 w-4" />
-                    <span className="sr-only">LinkedIn</span>
-                  </Button>
-                </Link>
-                <Link href="https://twitter.com" target="_blank">
-                  <Button variant="outline" size="icon">
-                    <Twitter className="h-4 w-4" />
-                    <span className="sr-only">Twitter</span>
-                  </Button>
-                </Link>
-                <Link href="mailto:tarangbhargava09@gmail.com">
-                  <Button variant="outline" size="icon">
-                    <Mail className="h-4 w-4" />
-                    <span className="sr-only">Email</span>
-                  </Button>
-                </Link>
+              <div className="flex justify-center">
+                <div className="relative w-full h-[450px] rounded-lg overflow-hidden shadow-xl border-4 border-primary/20 dark:border-primary/10">
+                  <OptimizedImage
+                    src="/images/about-image.jpg"
+                    alt="Tarang Bhargava"
+                    fill
+                    className="object-cover"
+                    fallbackSrc="/images/about-image-placeholder.svg"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">Projects</h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Projects Section */}
+        <section id="projects" className="py-10 md:py-16 lg:py-20 px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col items-center mb-8">
+              <div className="flex items-center gap-3 mb-2">
+                <Icon3D icon="projects" color="purple" size={24} />
+                <h2 className="text-3xl font-bold">Projects</h2>
+              </div>
+              <div className="h-1 w-20 bg-primary mt-3 rounded-full"></div>
+              <p className="mt-3 text-muted-foreground text-center max-w-2xl">
+                Explore my portfolio of projects showcasing my skills in web development,
+                data visualization and application design.
+              </p>
+            </div>
+
+            {/* Featured Projects */}
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold mb-2">Featured Projects</h3>
+              <div className="h-1 w-16 bg-primary/60 mx-auto rounded-full"></div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12 auto-rows-fr">
+              <EnhancedProjectCard
+                title="Amazer - E-Commerce Platform"
+                description="An Amazon-inspired e-commerce platform with user authentication, product management, shopping cart, and 3D product visualization."
+                link="https://github.com/tarang07q/Luxify-Amazon-Clone"
+                tags={["React", "Redux", "Node.js", "MongoDB"]}
+                imageUrl="/images/amazer.jpg"
+              />
+
+              <EnhancedProjectCard
+                title="Apt_Fincare - Financial Management"
+                description="A finance management system for expense tracking, budget planning, bill reminders, and investment portfolio monitoring."
+                link="https://github.com/tarang07q/Apt_Fincare"
+                tags={["Next.js", "TypeScript", "MongoDB", "Chart.js"]}
+                imageUrl="/images/fintrack.jpg"
+              />
+
+              <EnhancedProjectCard
+                title="Sustainable Investment Portfolio"
+                description="An AI-powered investment platform balancing financial returns with ESG criteria, featuring portfolio management tools."
+                link="https://github.com/tarang07q/Sustainable-Investment-Portfolio"
+                tags={["React", "Python", "AI/ML", "D3.js"]}
+                imageUrl="/images/sustainable.jpg"
+              />
+            </div>
+
+            {/* Other Projects */}
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold mb-2">Other Projects</h3>
+              <div className="h-1 w-16 bg-primary/60 mx-auto rounded-full"></div>
+              <p className="mt-2 text-muted-foreground max-w-xl mx-auto">
+                Additional projects that showcase different skills and technologies.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
               <ProjectCard
-                title="Trainify- A Fitness App"
-                description="A fitness application that helps users track their workouts and details about them."
-                image="https://private-user-images.githubusercontent.com/123387466/419128547-166be45f-1444-4f70-bf80-60b91b955db2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDIxMzU0MDQsIm5iZiI6MTc0MjEzNTEwNCwicGF0aCI6Ii8xMjMzODc0NjYvNDE5MTI4NTQ3LTE2NmJlNDVmLTE0NDQtNGY3MC1iZjgwLTYwYjkxYjk1NWRiMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzE2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMxNlQxNDI1MDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT04ZGQxM2VkOTZhOWIzYjA4OWEyZTdlMWZmOGFjZjFhZjY0N2M4YTFhNWE2NDY5ZTQ2YzMwNDc0MjRhMzQxN2MyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.q9KHsYA7iOULEBKME2WV8fAaSPjHrGC5akn-qb5X3NM"
+                title="Trainify - Workout Tracker"
+                description="A fitness app for tracking workouts and fitness goals with customizable plans, progress charts, and nutrition tracking."
+                image="/images/trainify.png"
                 link="https://github.com/tarang07q/Trainify"
-                tags={["Next.js", "TypeScript", "Node.js"]}
+                tags={["TypeScript", "React", "Tailwind CSS"]}
               />
               <ProjectCard
-                title="Red Light Traffic Violation and Number Plate Detecion"
-                description="An autonomous traffic red-light violation detection system was built, which has the potential to significantly improve transportatsion management in smart cities."
-                image="https://private-user-images.githubusercontent.com/123387466/410114860-be910a23-eda8-41ba-8674-11e9adfe6c90.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDIxMzU1NzMsIm5iZiI6MTc0MjEzNTI3MywicGF0aCI6Ii8xMjMzODc0NjYvNDEwMTE0ODYwLWJlOTEwYTIzLWVkYTgtNDFiYS04Njc0LTExZTlhZGZlNmM5MC5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzE2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMxNlQxNDI3NTNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05NjBhZTA3OWM0MGNhMWUwZDkwMjYzYjE3MjgwMjMwMWU4MmM0MTJhZGY1ZjZiYTcxNjBhMDI3MDhlZDg0MjBlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.uiyU6uZguPsm8WgjTqR8bzUJogMO_3pdZVgzgkWtdLo"
+                title="Traffic Violation Detection"
+                description="A computer vision system that detects traffic violations at intersections and captures license plate information."
+                image="/images/traffic.jpg"
                 link="https://github.com/tarang07q/Red-Light-Traffic-Violation-and-Number-Plate-Detecion"
-                tags={[" OpenCV", "Python", "MongoDB","C"]}
+                tags={["Python", "OpenCV", "Computer Vision"]}
               />
               <ProjectCard
                 title="Zoom Clone"
-                description="Bringing seamless video conferencing to life! This project is a powerful Zoom-inspired application built using the latest web technologies."
-                image="https://private-user-images.githubusercontent.com/123387466/411246695-fc4b037a-c9c8-4c00-aa4e-0fef4f4a5d21.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDIxMzU3MTQsIm5iZiI6MTc0MjEzNTQxNCwicGF0aCI6Ii8xMjMzODc0NjYvNDExMjQ2Njk1LWZjNGIwMzdhLWM5YzgtNGMwMC1hYTRlLTBmZWY0ZjRhNWQyMS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzE2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMxNlQxNDMwMTRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02MWU0OGQxNjAwNTZhM2E2M2UzYTFjMGQ4NGIwZGNlNWFjNzc5YTY3MGI5MzQ3ODQwZTE3OTllMTAwMTVmYTczJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.EGYXzSxY5L7Q_QBpjRjDLsGjPFMqp4nO7uFzxfXwi_c"
+                description="A video conferencing app with video/audio calls, screen sharing, and meeting scheduling built with WebRTC technology."
+                image="/images/zoom.jpg"
                 link="https://github.com/tarang07q/Tardroid_zoom_clone"
-                tags={["TypeScript", "Next.js", "CSS"]}
+                tags={["TypeScript", "Next.js", "WebRTC"]}
               />
             </div>
           </div>
         </section>
 
-        <section className="py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-              Tech Stack
-            </h2>
+        {/* Tech Stack Section */}
+        <section className="py-10 md:py-16 lg:py-20 px-8 bg-muted/10 dark:bg-muted/5">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col items-center mb-8">
+              <div className="flex items-center gap-3 mb-2">
+                <Icon3D icon="code" color="indigo" size={24} />
+                <h2 className="text-3xl font-bold">Tech Stack</h2>
+              </div>
+              <div className="h-1 w-20 bg-primary mt-3 rounded-full"></div>
+              <p className="mt-3 text-muted-foreground text-center max-w-2xl">
+                The technologies and tools I use to bring ideas to life.
+              </p>
+            </div>
             <TechStack />
           </div>
         </section>
 
-        <section id="contact" className="py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="mx-auto max-w-2xl">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-                Get in Touch
-              </h2>
-              <ContactForm />
+        {/* Contact Section */}
+        <section id="contact" className="py-8 md:py-12 lg:py-16 px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col items-center mb-6">
+              <div className="flex items-center gap-3 mb-2">
+                <Icon3D icon="contact" color="pink" size={24} />
+                <h2 className="text-3xl font-bold">Get in Touch</h2>
+              </div>
+              <div className="h-1 w-20 bg-primary mt-2 rounded-full"></div>
+              <p className="mt-2 text-muted-foreground text-center max-w-2xl">
+                Have a project in mind or want to discuss opportunities? I'd love to hear from you.
+              </p>
             </div>
+            <ContactForm />
           </div>
         </section>
       </main>
 
-      <footer className="border-t">
-        <div className="container flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6">
-          
-          <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-            <Link className="text-xs hover:underline underline-offset-4" href="#">
-              Terms of Service
-            </Link>
-            <Link className="text-xs hover:underline underline-offset-4" href="#">
-              Privacy
-            </Link>
-          </nav>
-        </div>
-      </footer>
+
     </div>
   )
 }

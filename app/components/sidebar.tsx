@@ -1,0 +1,79 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import { ModeToggle } from './mode-toggle';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+
+export function Sidebar() {
+  return (
+    <aside className="fixed left-0 top-0 h-full w-64 bg-slate-900 dark:bg-slate-950 text-white flex flex-col z-50">
+      <div className="flex flex-col items-center py-8">
+        <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white mb-4">
+          <Image
+            src="/images/profile.jpg"
+            alt="Tarang Bhargava"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <h2 className="text-xl font-bold">Tarang Bhargava</h2>
+
+        {/* Social links */}
+        <div className="flex space-x-3 mt-4">
+          <Link href="https://github.com/tarang07q" className="text-white hover:text-primary transition-colors">
+            <FaGithub size={20} />
+          </Link>
+          <Link href="https://linkedin.com/in/tarangbhargava" className="text-white hover:text-primary transition-colors">
+            <FaLinkedin size={20} />
+          </Link>
+          <Link href="https://x.com/bhargava_tarang" className="text-white hover:text-primary transition-colors">
+            <FaTwitter size={20} />
+          </Link>
+          <Link href="mailto:contact@tarangbhargava.com" className="text-white hover:text-primary transition-colors">
+            <FaEnvelope size={20} />
+          </Link>
+        </div>
+      </div>
+
+      {/* Navigation links */}
+      <nav className="mt-8 flex-1">
+        <ul className="space-y-2">
+          <li>
+            <Link href="/#home" className="flex items-center px-6 py-3 hover:bg-slate-800 dark:hover:bg-slate-900 transition-colors">
+              <span className="mr-3">🏠</span>
+              <span>Home</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/#about" className="flex items-center px-6 py-3 hover:bg-slate-800 dark:hover:bg-slate-900 transition-colors">
+              <span className="mr-3">👤</span>
+              <span>About</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/#resume" className="flex items-center px-6 py-3 hover:bg-slate-800 dark:hover:bg-slate-900 transition-colors">
+              <span className="mr-3">📄</span>
+              <span>Resume</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/#projects" className="flex items-center px-6 py-3 hover:bg-slate-800 dark:hover:bg-slate-900 transition-colors">
+              <span className="mr-3">💼</span>
+              <span>Projects</span>
+            </Link>
+          </li>
+          <li>
+            <Link href="/#contact" className="flex items-center px-6 py-3 hover:bg-slate-800 dark:hover:bg-slate-900 transition-colors">
+              <span className="mr-3">✉️</span>
+              <span>Contact</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Theme toggle at bottom */}
+      <div className="p-6">
+        <ModeToggle />
+      </div>
+    </aside>
+  );
+}

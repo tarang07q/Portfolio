@@ -1,18 +1,57 @@
 "use server"
 
 export async function submitContactForm(formData: FormData) {
-  // Simulate a delay
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+  try {
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
 
-  const name = formData.get("name")
-  const email = formData.get("email")
-  const message = formData.get("message")
+    // Validate the data
+    if (!name || !email || !message) {
+      return {
+        success: false,
+        message: "Please fill out all fields.",
+      };
+    }
 
-  // Here you would typically send an email or save to a database
-  console.log("Form submission:", { name, email, message })
+    // Send the data to our API endpoint
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, message }),
+    });
 
-  return {
-    message: "Thanks for your message! I'll get back to you soon.",
+    // If MongoDB is not set up yet, this will fall back to console logging
+    if (!response.ok) {
+      console.log("Form submission (MongoDB not configured):", { name, email, message });
+      return {
+        success: true,
+        message: "Thanks for your message! I'll get back to you soon.",
+      };
+    }
+
+    const data = await response.json();
+
+    return {
+      success: true,
+      message: "Thanks for your message! I'll get back to you soon.",
+    };
+  } catch (error) {
+    console.error("Error submitting form:", error);
+
+    // Fallback to console logging if there's an error
+    console.log("Form submission (fallback):", {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message")
+    });
+
+    return {
+      success: true,
+      message: "Thanks for your message! ",
+    };
   }
 }
 
