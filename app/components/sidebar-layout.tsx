@@ -3,7 +3,17 @@
 import Link from 'next/link';
 import OptimizedImage from './optimized-image';
 import { ModeToggle } from './mode-toggle';
-import { Mail, Home, User, FileText, Briefcase, Contact, Github, Linkedin, Twitter } from 'lucide-react';
+import {
+  IconMail,
+  IconHome,
+  IconUser,
+  IconFileText,
+  IconBriefcase,
+  IconAddressBook,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandTwitter
+} from '@tabler/icons-react';
 import Icon3D from './3d-icon';
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
@@ -76,22 +86,22 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
           <div className="flex space-x-4 mt-4">
             <Link href="https://github.com/tarang07q" target="_blank">
               <div className={`rounded-full p-2 ${isDark ? 'bg-blue-950' : 'bg-blue-900'} hover:bg-blue-800 transition-colors`}>
-                <Github size={18} className="text-blue-400" />
+                <IconBrandGithub size={18} className="text-blue-400" />
               </div>
             </Link>
             <Link href="https://www.linkedin.com/in/tarang-bhargava-400687269/" target="_blank">
               <div className={`rounded-full p-2 ${isDark ? 'bg-indigo-950' : 'bg-indigo-900'} hover:bg-indigo-800 transition-colors`}>
-                <Linkedin size={18} className="text-indigo-400" />
+                <IconBrandLinkedin size={18} className="text-indigo-400" />
               </div>
             </Link>
             <Link href="https://x.com/bhargava_tarang" target="_blank">
               <div className={`rounded-full p-2 ${isDark ? 'bg-teal-950' : 'bg-teal-900'} hover:bg-teal-800 transition-colors`}>
-                <Twitter size={18} className="text-teal-400" />
+                <IconBrandTwitter size={18} className="text-teal-400" />
               </div>
             </Link>
             <Link href="mailto:tarangbhargava09@gmail.com">
               <div className={`rounded-full p-2 ${isDark ? 'bg-pink-950' : 'bg-pink-900'} hover:bg-pink-800 transition-colors`}>
-                <Mail size={18} className="text-pink-400" />
+                <IconMail size={18} className="text-pink-400" />
               </div>
             </Link>
           </div>
@@ -117,7 +127,7 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div className={`rounded-full p-2 mr-3 ${isDark ? 'bg-blue-950' : 'bg-blue-900'}`}>
-                  <Home size={16} className="text-blue-400" />
+                  <IconHome size={16} className="text-blue-400" />
                 </div>
                 <span>Home</span>
               </Link>
@@ -139,7 +149,7 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div className={`rounded-full p-2 mr-3 ${isDark ? 'bg-green-950' : 'bg-green-900'}`}>
-                  <User size={16} className="text-green-400" />
+                  <IconUser size={16} className="text-green-400" />
                 </div>
                 <span>About</span>
               </Link>
@@ -155,7 +165,7 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
                 }`}
               >
                 <div className={`rounded-full p-2 mr-3 ${isDark ? 'bg-orange-950' : 'bg-orange-900'}`}>
-                  <FileText size={16} className="text-orange-400" />
+                  <IconFileText size={16} className="text-orange-400" />
                 </div>
                 <span>Resume</span>
               </Link>
@@ -177,7 +187,7 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div className={`rounded-full p-2 mr-3 ${isDark ? 'bg-purple-950' : 'bg-purple-900'}`}>
-                  <Briefcase size={16} className="text-purple-400" />
+                  <IconBriefcase size={16} className="text-purple-400" />
                 </div>
                 <span>Projects</span>
               </Link>
@@ -199,7 +209,7 @@ export function SidebarLayout({ children }: { children: React.ReactNode }) {
                 }}
               >
                 <div className={`rounded-full p-2 mr-3 ${isDark ? 'bg-pink-950' : 'bg-pink-900'}`}>
-                  <Mail size={16} className="text-pink-400" />
+                  <IconMail size={16} className="text-pink-400" />
                 </div>
                 <span>Contact</span>
               </Link>

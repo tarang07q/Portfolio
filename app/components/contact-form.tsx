@@ -4,18 +4,44 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useState } from "react"
-import { submitContactForm } from "../actions"
+import { useState, FormEvent } from "react"
 
 export default function ContactForm() {
   const [pending, setPending] = useState(false)
   const [message, setMessage] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  })
 
-  async function handleSubmit(formData: FormData) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     setPending(true)
+
     try {
-      const response = await submitContactForm(formData)
-      setMessage(response.message)
+      // For static export, we'll just log to console and show success message
+      console.log("Form submission:", formData)
+
+      // In a real app, you would send this data to a backend service
+      // For GitHub Pages deployment, you could use a service like Formspree or EmailJS
+
+      setMessage("Thanks for your message! I'll get back to you soon.")
+
+      // Clear the form
+      setFormData({
+        name: "",
+        email: "",
+        message: ""
+      })
     } catch (error) {
       setMessage("Something went wrong. Please try again.")
     } finally {
@@ -27,7 +53,7 @@ export default function ContactForm() {
     <div className="grid md:grid-cols-2 gap-6">
       <Card className="p-5 border border-primary/20 dark:border-primary/10 shadow-md hover:shadow-lg transition-shadow rounded-lg bg-card/80 backdrop-blur-sm">
         <h3 className="text-xl font-semibold mb-3 text-center">Send a Message</h3>
-        <form action={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="mt-2">
             <label htmlFor="name" className="block text-sm font-medium mb-2">
               Name
@@ -35,6 +61,8 @@ export default function ContactForm() {
             <Input
               id="name"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Your name"
               className="border-primary/20 dark:border-primary/10 focus:border-primary rounded-md h-10"
               required
@@ -48,6 +76,8 @@ export default function ContactForm() {
               id="email"
               name="email"
               type="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="your.email@example.com"
               className="border-primary/20 dark:border-primary/10 focus:border-primary rounded-md h-10"
               required
@@ -60,6 +90,8 @@ export default function ContactForm() {
             <Textarea
               id="message"
               name="message"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Your message here..."
               className="min-h-[110px] border-primary/20 dark:border-primary/10 focus:border-primary rounded-md"
               required

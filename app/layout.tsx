@@ -23,11 +23,38 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/images/about-image.png" as="image" />
-        <link rel="preload" href="/images/profile.png" as="image" />
-        <link rel="preload" href="/images/amazer.jpg" as="image" />
-        <link rel="preload" href="/images/fintrack.jpg" as="image" />
-        <link rel="preload" href="/images/sustainable.jpg" as="image" />
+        <link rel="preload" href={process.env.NODE_ENV === 'production' ? '/Portfolio/images/about-image.jpg' : '/images/about-image.jpg'} as="image" />
+        <link rel="preload" href={process.env.NODE_ENV === 'production' ? '/Portfolio/images/profile.png' : '/images/profile.png'} as="image" />
+        <link rel="preload" href={process.env.NODE_ENV === 'production' ? '/Portfolio/images/amazer.jpg' : '/images/amazer.jpg'} as="image" />
+        <link rel="preload" href={process.env.NODE_ENV === 'production' ? '/Portfolio/images/fintrack.jpg' : '/images/fintrack.jpg'} as="image" />
+        <link rel="preload" href={process.env.NODE_ENV === 'production' ? '/Portfolio/images/sustainable.jpg' : '/images/sustainable.jpg'} as="image" />
+
+        {/* Add inline styles for GitHub Pages */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @import url('${process.env.NODE_ENV === 'production' ? '/Portfolio/globals.css' : '/globals.css'}');
+          @import url('${process.env.NODE_ENV === 'production' ? '/Portfolio/styles.css' : '/styles.css'}');
+
+          /* Fallback styles in case CSS files don't load */
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+          }
+
+          .dark body {
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+          }
+
+          a { color: #0070f3; text-decoration: none; }
+          a:hover { text-decoration: underline; }
+
+          .dark a { color: #3b82f6; }
+        `}} />
+
+        {/* No need for direct CSS links in dynamic deployment */}
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

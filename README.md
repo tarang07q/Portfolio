@@ -84,5 +84,28 @@ portfolio_Tarang/
 - **Tailwind CSS**: Responsive and modern UI styling.
 - **Custom Hooks**: Enhanced functionality using React hooks.
 - **Assets Management**: Organized storage for images and documents.
+- **Dark/Light Mode**: Theme toggle for better user experience.
+- **Responsive Design**: Works on all device sizes.
 
+## 🚢 Deployment
 
+### Deploying to Vercel
+
+The easiest way to deploy this portfolio is to use the [Vercel Platform](https://vercel.com).
+
+1. Push your code to a GitHub repository.
+2. Import your project to Vercel:
+   - Go to [Vercel](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Vercel will automatically detect Next.js and use the optimal build settings
+   - Click "Deploy"
+
+3. Your site will be deployed to a URL like `https://your-portfolio.vercel.app`
+
+### Environment Variables
+
+Make sure to set up the following environment variables in your Vercel project:
+
+- `MONGODB_URI`: Your MongoDB connection string
+- `NEXT_PUBLIC_BASE_URL`: The base URL of your deployed application

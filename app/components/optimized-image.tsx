@@ -14,7 +14,13 @@ export default function OptimizedImage({
   className = "",
   ...props
 }: OptimizedImageProps) {
-  const [imgSrc, setImgSrc] = useState(src);
+  const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
+
+  // For dynamic deployment, we don't need to modify paths
+  const processedSrc = src;
+  const processedFallbackSrc = fallbackSrc;
+
+  const [imgSrc, setImgSrc] = useState(processedSrc);
   const [hasError, setHasError] = useState(false);
 
   return (
@@ -24,7 +30,7 @@ export default function OptimizedImage({
       alt={alt}
       className={`${className} ${hasError ? "placeholder-image" : ""}`}
       onError={() => {
-        setImgSrc(fallbackSrc);
+        setImgSrc(processedFallbackSrc);
         setHasError(true);
       }}
       priority
