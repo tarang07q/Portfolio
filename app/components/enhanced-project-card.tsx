@@ -16,22 +16,20 @@ interface EnhancedProjectCardProps {
 export default function EnhancedProjectCard({
   title,
   description,
-  imageUrl,
+  imageUrl = "/Portfolio/images/project-placeholder.svg",
   link,
   tags
 }: EnhancedProjectCardProps) {
   return (
     <div className="transition-all duration-300 hover:-translate-y-2 h-full">
       <Card className="overflow-hidden h-full flex flex-col border border-primary/10 dark:border-primary/5 shadow-lg">
-        <div className="relative aspect-video">
-          {/* Image with fallback */}
+        <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
           <OptimizedImage
             src={imageUrl}
             alt={title}
             fill
-            className="object-cover transition-transform hover:scale-105 duration-500"
-            fallbackSrc="/images/project-placeholder.svg"
-            priority
+            className="object-cover"
+            fallbackSrc="/Portfolio/images/project-placeholder.svg"
           />
         </div>
         <CardContent className="p-5 flex-grow flex flex-col justify-between">

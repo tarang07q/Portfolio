@@ -7,6 +7,8 @@ import EnhancedProjectCard from "./components/enhanced-project-card"
 import TechStack from "./components/tech-stack"
 import Icon3D from "./components/3d-icon"
 import OptimizedImage from "./components/optimized-image"
+import { useEffect, useState } from "react"
+import { fetchGitHubRepos } from "@/lib/utils"
 
 export default function Page() {
 
@@ -120,70 +122,8 @@ export default function Page() {
               </p>
             </div>
 
-            {/* Featured Projects */}
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-2">Featured Projects</h3>
-              <div className="h-1 w-16 bg-primary/60 mx-auto rounded-full"></div>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12 auto-rows-fr">
-              <EnhancedProjectCard
-                title="Amazer - E-Commerce Platform"
-                description="An Amazon-inspired e-commerce platform with user authentication, product management, shopping cart, and 3D product visualization."
-                link="https://github.com/tarang07q/Luxify-Amazon-Clone"
-                tags={["React", "Redux", "Node.js", "MongoDB"]}
-                imageUrl="/images/amazer.jpg"
-              />
-
-              <EnhancedProjectCard
-                title="Apt_Fincare - Financial Management"
-                description="A finance management system for expense tracking, budget planning, bill reminders, and investment portfolio monitoring."
-                link="https://github.com/tarang07q/Apt_Fincare"
-                tags={["Next.js", "TypeScript", "MongoDB", "Chart.js"]}
-                imageUrl="/images/fintrack.jpg"
-              />
-
-              <EnhancedProjectCard
-                title="Sustainable Investment Portfolio"
-                description="An AI-powered investment platform balancing financial returns with ESG criteria, featuring portfolio management tools."
-                link="https://github.com/tarang07q/Sustainable-Investment-Portfolio"
-                tags={["React", "Python", "AI/ML", "D3.js"]}
-                imageUrl="/images/sustainable.jpg"
-              />
-            </div>
-
-            {/* Other Projects */}
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold mb-2">Other Projects</h3>
-              <div className="h-1 w-16 bg-primary/60 mx-auto rounded-full"></div>
-              <p className="mt-2 text-muted-foreground max-w-xl mx-auto">
-                Additional projects that showcase different skills and technologies.
-              </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
-              <ProjectCard
-                title="Trainify - Workout Tracker"
-                description="A fitness app for tracking workouts and fitness goals with customizable plans, progress charts, and nutrition tracking."
-                image="/images/trainify.png"
-                link="https://github.com/tarang07q/Trainify"
-                tags={["TypeScript", "React", "Tailwind CSS"]}
-              />
-              <ProjectCard
-                title="Traffic Violation Detection"
-                description="A computer vision system that detects traffic violations at intersections and captures license plate information."
-                image="/images/traffic.jpg"
-                link="https://github.com/tarang07q/Red-Light-Traffic-Violation-and-Number-Plate-Detecion"
-                tags={["Python", "OpenCV", "Computer Vision"]}
-              />
-              <ProjectCard
-                title="Zoom Clone"
-                description="A video conferencing app with video/audio calls, screen sharing, and meeting scheduling built with WebRTC technology."
-                image="/images/zoom.jpg"
-                link="https://github.com/tarang07q/Tardroid_zoom_clone"
-                tags={["TypeScript", "Next.js", "WebRTC"]}
-              />
-            </div>
+            {/* Dynamic Projects from GitHub */}
+            <DynamicProjectList />
           </div>
         </section>
 
@@ -225,5 +165,53 @@ export default function Page() {
 
     </div>
   )
+}
+
+function DynamicProjectList() {
+  const [repos, setRepos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchGitHubRepos("tarang07q")
+      .then((data) => {
+        // Filter out forked and archived repos, and sort by stargazers
+        setRepos(
+          data
+            .filter((repo: any) => !repo.fork && !repo.archived)
+            .sort((a: any, b: any) => b.stargazers_count - a.stargazers_count)
+        );
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError("Failed to load projects from GitHub.");
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div className="text-center py-8">Loading projects...</div>;
+  if (error) return <div className="text-center text-red-500 py-8">{error}</div>;
+  if (!repos.length) return <div className="text-center py-8">No projects found.</div>;
+
+  return (
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+      {repos.map((repo) => (
+        <div key={repo.name} className="flex flex-col h-full">
+          <EnhancedProjectCard
+            title={repo.name.replace(/[-_]/g, ' ')}
+            description={repo.description || "No description provided."}
+            link={repo.html_url}
+            tags={repo.topics?.length ? repo.topics : [repo.language].filter(Boolean)}
+            imageUrl="/Portfolio/images/project-placeholder.svg"
+          />
+          <div className="flex justify-center mt-2">
+            <Link href={`/projects/${repo.name}`}>
+              <Button variant="outline" size="sm">View Details</Button>
+            </Link>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 

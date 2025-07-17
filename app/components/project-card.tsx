@@ -12,18 +12,17 @@ interface ProjectCardProps {
   tags: string[]
 }
 
-export default function ProjectCard({ title, description, image, link, tags }: ProjectCardProps) {
+export default function ProjectCard({ title, description, image = "/Portfolio/images/project-placeholder.svg", link, tags }: ProjectCardProps) {
   return (
     <div className="transition-all duration-300 hover:-translate-y-2 h-full">
       <Card className="overflow-hidden h-full flex flex-col border border-primary/10 dark:border-primary/5 shadow-lg">
-        <div className="relative aspect-video">
+        <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
           <OptimizedImage
             src={image}
             alt={title}
             fill
-            className="object-cover transition-transform hover:scale-105 duration-500"
-            fallbackSrc="/images/project-placeholder.svg"
-            priority
+            className="object-cover"
+            fallbackSrc="/Portfolio/images/project-placeholder.svg"
           />
         </div>
         <CardContent className="p-5 flex-grow flex flex-col justify-between">

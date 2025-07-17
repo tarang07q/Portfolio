@@ -16,23 +16,16 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
 
-  // Only add basePath if we're on GitHub Pages
-  const isGitHubPages = process.env.GITHUB_PAGES === 'true';
-
-  // Add basePath to src and fallbackSrc if they are relative paths and we're on GitHub Pages
+  // Always add basePath in production for GitHub Pages
   const processedSrc = typeof src === 'string'
-    ? (src.startsWith('/') && isGitHubPages
+    ? (src.startsWith('/') && basePath
       ? `${basePath}${src}`
-      : (!src.startsWith('http') && !src.startsWith('data:') && isGitHubPages
-        ? `${basePath}/${src}`
-        : src))
+      : src)
     : src;
 
-  const processedFallbackSrc = fallbackSrc.startsWith('/') && isGitHubPages
+  const processedFallbackSrc = fallbackSrc.startsWith('/') && basePath
     ? `${basePath}${fallbackSrc}`
-    : (!fallbackSrc.startsWith('http') && !fallbackSrc.startsWith('data:') && isGitHubPages
-      ? `${basePath}/${fallbackSrc}`
-      : fallbackSrc);
+    : fallbackSrc;
 
   const [imgSrc, setImgSrc] = useState(processedSrc);
   const [hasError, setHasError] = useState(false);
